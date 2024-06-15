@@ -38,17 +38,17 @@ def extract_price(text):
     return None
 
 def extract_cartridges_data(soup):
-    cartridges_data = []
-    grid_5_divs = soup.find_all("div", class_="grid_5 omega")
-    for grid_5_div in grid_5_divs:
+    cartridges_data = [] # создаём массив для итоговых данных
+    grid_5_divs = soup.find_all("div", class_="grid_5 omega") # находим все ячейки страницы
+    for grid_5_div in grid_5_divs: # проходимся циклом по каждой ячейке, ищем ячейки аналогов     
         if not grid_5_div.find("div", class_="analog-title"):
             continue
 
-        analog_titles = grid_5_div.find_all("div", class_="analog-title")
-        analog_tables = grid_5_div.find_all("table", class_="analog-table")
+        analog_titles = grid_5_div.find_all("div", class_="analog-title") # массив с заголовками аналогов
+        analog_tables = grid_5_div.find_all("table", class_="analog-table") # массив содержащий таблицы с данными аналогов
 
         for title, table in zip(analog_titles, analog_tables):
-            cartridge_name = title.find("b").text if title.find("b") else "-"
+            cartridge_name = title.find("b").text
             rows = table.find_all("tr")[2:]
             for row in rows:
                 cells = row.find_all("td")
