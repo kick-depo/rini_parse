@@ -1,5 +1,5 @@
 import pymysql
-from parsing import array
+from parsing import get_data_from_page
 try:
     connection = pymysql.connect(
     host = 'localhost',
@@ -13,7 +13,7 @@ try:
     try:
         with connection.cursor() as cursor:
             sql = f"""INSERT INTO `wp_posts`(post_author, post_content, post_title, post_excerpt, comment_status, ping_status, post_name, to_ping, pinged, post_content_filtered, post_parent, guid, menu_order, post_type) 
-            VALUES (1, '', {name}, '', 'closed', 'closed', {slug}, '', '',))"""
+            VALUES (1, '', {cartridge_title}, '', 'closed', 'closed', {slug}, '', '',))"""
             cursor.execute(sql, (title, slug))
 
             guid = f'http://your-domain.com/?p={post_id}'
